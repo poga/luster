@@ -34,24 +34,32 @@ impl<'gc> fmt::Display for FunctionProto<'gc> {
         writeln!(f, "=============")?;
         writeln!(
             f,
-            "fixed_params({}), has_varargs({}), stack_size({})",
+            "fixed_params: {}, has_varargs: {}, stack_size: {}",
             self.fixed_params, self.has_varargs, self.stack_size
         )?;
-        writeln!(f, "constants:")?;
-        for (i, c) in self.constants.iter().enumerate() {
-            writeln!(f, "{}: {:?}", i, c)?;
+        if self.constants.len() > 0 {
+            writeln!(f, "constants:")?;
+            for (i, c) in self.constants.iter().enumerate() {
+                writeln!(f, "{}: {:?}", i, c)?;
+            }
         }
-        writeln!(f, "opcodes:")?;
-        for (i, c) in self.opcodes.iter().enumerate() {
-            writeln!(f, "{}: {:?}", i, c)?;
+        if self.opcodes.len() > 0 {
+            writeln!(f, "opcodes:")?;
+            for (i, c) in self.opcodes.iter().enumerate() {
+                writeln!(f, "{}: {:?}", i, c)?;
+            }
         }
-        writeln!(f, "upvalues:")?;
-        for (i, u) in self.upvalues.iter().enumerate() {
-            writeln!(f, "{}: {:?}", i, u)?;
+        if self.upvalues.len() > 0 {
+            writeln!(f, "upvalues:")?;
+            for (i, u) in self.upvalues.iter().enumerate() {
+                writeln!(f, "{}: {:?}", i, u)?;
+            }
         }
-        writeln!(f, "prototypes:")?;
-        for p in self.prototypes.iter() {
-            writeln!(f, "{}", p)?;
+        if self.prototypes.len() > 0 {
+            writeln!(f, "prototypes:")?;
+            for p in self.prototypes.iter() {
+                writeln!(f, "{}", p)?;
+            }
         }
         Ok(())
     }
